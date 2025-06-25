@@ -1,3 +1,5 @@
+/* index.css */
+
 body {
   background-image: url("images/station.jpg");
   background-size: cover;
@@ -9,19 +11,23 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
   background-color: rgba(255, 255, 255, 0.85);
   width: 95%;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 15px;
+  max-width: 400px;
+  padding: 16px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-sizing: border-box;
 }
 
 #count-el {
@@ -30,16 +36,17 @@ body {
 }
 
 .row-inc,
-.row-dec {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
+.row-dec,
 .row-save {
   display: flex;
+  gap: 6px;
   justify-content: center;
-  gap: 10px;
+}
+
+.row-inc button,
+.row-dec button {
+  flex: 1;
+  min-width: 0;
 }
 
 button {
@@ -47,10 +54,10 @@ button {
   border: none;
   border-radius: 5px;
   color: #fff;
-  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
   transition: opacity 0.2s, box-shadow 0.2s;
-  flex: 1;
 }
 
 #increment-btn {
@@ -75,18 +82,16 @@ button {
 
 #save-btn {
   background: darkgreen;
-  flex: none;
-  width: 45%;
+  width: 48%;
 }
 
 #reset-btn {
   background: darkblue;
-  flex: none;
-  width: 45%;
+  width: 48%;
 }
 
 button:hover:not(:disabled) {
-  opacity: 0.8;
+  opacity: 0.85;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -95,37 +100,13 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button:focus {
-  outline: 2px solid yellow;
-}
-
 #save-el,
 #total-el {
-  margin: 0;
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  margin: 4px 0;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  word-break: break-word;
 }
-
-@media (max-width: 400px) {
-  .container {
-    padding: 12px;
-    margin: 15px auto;
-  }
-  #count-el {
-    font-size: 2.5em;
-  }
-  button {
-    width: 90%;
-    flex: none;
-  }
-}
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 90%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 5px;
-  text-align: center;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+#save-el {
+  color: darkgreen;
 }
