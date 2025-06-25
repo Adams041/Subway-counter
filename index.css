@@ -1,63 +1,112 @@
 /* index.css */
 
+/* === Global Styles === */
 body {
-  background-image: url("images/station.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url("../images/station.jpg") center/cover no-repeat;
+  margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: bold;
   text-align: center;
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
+/* === Header === */
+.page-header {
+  width: 100%;
+  padding: 12px 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: inherit;
+}
+
+/* === Main Container === */
 .container {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.9);
+  max-width: 420px;
   width: 95%;
-  max-width: 400px;
+  margin: 0 auto;
   padding: 16px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 12px;
+  min-height: calc(100vh - 60px);
   box-sizing: border-box;
 }
 
+/* === Counter Display === */
 #count-el {
-  font-size: 3em;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   margin: 0;
+  color: #222;
 }
 
+/* === Section Titles === */
+h3 {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin: 4px 0;
+  color: #444;
+}
+
+/* === Button Rows === */
 .row-inc,
-.row-dec,
-.row-save {
+.row-dec {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   justify-content: center;
 }
 
 .row-inc button,
 .row-dec button {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 30%;
+  min-width: 80px;
+  margin: 4px 2px;
 }
 
+.row-save {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#save-btn,
+#reset-btn {
+  width: 45%;
+  min-width: 120px;
+}
+
+/* === Buttons === */
 button {
   padding: 10px 0;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: opacity 0.2s, box-shadow 0.2s;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 #increment-btn {
@@ -82,12 +131,10 @@ button {
 
 #save-btn {
   background: darkgreen;
-  width: 48%;
 }
 
 #reset-btn {
   background: darkblue;
-  width: 48%;
 }
 
 button:hover:not(:disabled) {
@@ -100,13 +147,57 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* === Entry Info === */
 #save-el,
 #total-el {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
   margin: 4px 0;
-  font-size: 0.9rem;
   word-wrap: break-word;
   word-break: break-word;
+  color: #333;
 }
-#save-el {
-  color: darkgreen;
+
+/* === Collapsible History (Optional) === */
+details {
+  margin-top: 10px;
+  text-align: left;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #222;
+}
+
+/* === Responsive Tweaks === */
+@media (max-width: 400px) {
+  .container {
+    padding: 12px;
+  }
+
+  #save-btn,
+  #reset-btn {
+    width: 100%;
+  }
+
+  .row-inc button,
+  .row-dec button {
+    flex: 1 1 45%;
+  }
+}
+@media (max-width: 320px) {
+  #count-el {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+  }
 }
