@@ -1,72 +1,63 @@
 // js/index.js
-
-document.addEventListener("DOMContentLoaded", () => {
-  const countEl  = document.getElementById("count-el");
-  const saveEl   = document.getElementById("save-el");
-  const totalEl  = document.getElementById("total-el");
-  const incBtn   = document.getElementById("increment-btn");
-  const inc5Btn  = document.getElementById("increment-5-btn");
-  const inc10Btn = document.getElementById("increment-10-btn");
-  const decBtn   = document.getElementById("decrement-btn");
-  const dec5Btn  = document.getElementById("decrement-5-btn");
-  const saveBtn  = document.getElementById("save-btn");
-  const resetBtn = document.getElementById("reset-btn");
+document.addEventListener("DOMContentLoaded", function () {
+  const countEl = document.getElementById("count-el");
+  const saveEl = document.getElementById("save-el");
+  const totalEl = document.getElementById("total-el");
 
   let count = 0;
-  let total = parseInt(localStorage.getItem("total")) || 0;
+  let total = 0;
 
-  saveEl.textContent = localStorage.getItem("history") || "Previous Entries:";
-  totalEl.innerText  = `Total People Counted: ${total}`;
-  updateCountDisplay();
-  updateSaveButton();
+  window.increment = function () {
+    count++;
+    updateCount();
+  };
 
-  function updateCountDisplay() {
-    countEl.innerText = count;
-    updateSaveButton();
-  }
+  window.incrementByFive = function () {
+    count += 5;
+    updateCount();
+  };
 
-  function updateSaveButton() {
-    saveBtn.disabled = (count === 0);
-  }
+  window.incrementByTen = function () {
+    count += 10;
+    updateCount();
+  };
 
-  function persist() {
-    localStorage.setItem("total", total);
-    localStorage.setItem("history", saveEl.textContent);
-  }
+  window.decrement = function () {
+    if (count > 0) {
+      count--;
+      updateCount();
+    }
+  };
 
-  function changeCount(delta) {
-    count = Math.max(0, count + delta);
-    updateCountDisplay();
-  }
+  window.decrementByFive = function () {
+    if (count >= 5) {
+      count -= 5;
+    } else {
+      count = 0;
+    }
+    updateCount();
+  };
 
-  function save() {
+  window.save = function () {
     if (count === 0) return;
-    // const timestamp = new Date().toISOString();
-    saveEl.textContent += ` ${count} —`;
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    saveEl.textContent += ` ${count} (${time}) —`;
     total += count;
+    totalEl.textContent = `Total People Counted: ${total}`;
     count = 0;
-    totalEl.innerText = `Total People Counted: ${total}`;
-    updateCountDisplay();
-    persist();
-  }
+    updateCount();
+  };
 
-  function clearSave() {
-    if (!confirm("Clear all history and reset counters?")) return;
+  window.clearSave = function () {
+    saveEl.textContent = "Previous Entries: ";
+    totalEl.textContent = "Total People Counted: 0";
     count = 0;
     total = 0;
-    saveEl.textContent = "Previous Entries:";
-    countEl.innerText   = "0";
-    totalEl.innerText   = "Total People Counted: 0";
-    saveBtn.disabled     = true;
-    localStorage.removeItem("total");
-    localStorage.removeItem("history");
-  }
+    updateCount();
+  };
 
-  incBtn.addEventListener("click", ()    => changeCount(1));
-  inc5Btn.addEventListener("click", ()   => changeCount(5));
-  inc10Btn.addEventListener("click", ()  => changeCount(10));
-  decBtn.addEventListener("click", ()    => changeCount(-1));
-  dec5Btn.addEventListener("click", ()   => changeCount(-5));
-  saveBtn.addEventListener("click", save);
-  resetBtn.addEventListener("click", clearSave);
+  function updateCount() {
+    countEl.textContent = count;
+  }
 });
+// This code handles the incrementing, decrementing, saving, and clearing of the count.

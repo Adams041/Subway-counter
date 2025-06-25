@@ -3,32 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Counter App</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
+
+  <title>Subway People Counter</title>
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-    <header>
-        <h1>Counter App</h1>
-        <p>Keep track of your count with ease!</p>
-    </header>
+
+  <header class="page-header">
+    <h1>🚇 People Counter</h1>
+  </header>
+
   <main class="container">
-    <h2 id="count-el">0</h2>
+    <h2 id="count-el" aria-live="polite">0</h2>
+
+    <h3>Count People</h3>
     <div class="row-inc">
-      <button id="increment-btn" aria-label="Increment by 1">+1</button>
-      <button id="increment-5-btn" aria-label="Increment by 5">+5</button>
-      <button id="increment-10-btn" aria-label="Increment by 10">+10</button>
+      <button id="increment-btn" onclick="increment()">+1</button>
+      <button id="increment-5-btn" onclick="incrementByFive()">+5</button>
+      <button id="increment-10-btn" onclick="incrementByTen()">+10</button>
     </div>
+
+    <h3>Adjust Count</h3>
     <div class="row-dec">
-      <button id="decrement-btn" aria-label="Decrement by 1">–1</button>
-      <button id="decrement-5-btn" aria-label="Decrement by 5">–5</button>
+      <button id="decrement-btn" onclick="decrement()">−1</button>
+      <button id="decrement-5-btn" onclick="decrementByFive()">−5</button>
     </div>
+
+    <h3>Actions</h3>
     <div class="row-save">
-      <button id="save-btn" aria-label="Save count">SAVE</button>
-      <button id="reset-btn" aria-label="Reset all">RESET</button>
+      <button id="save-btn" onclick="save()">SAVE</button>
+      <button id="reset-btn" onclick="clearSave()">RESET</button>
     </div>
-    <p id="save-el">Previous Entries:</p>
-    <p id="total-el">Total People Counted: 0</p>
+
+    <p id="save-el">Previous Entries: </p>
+    <p id="total-el" aria-live="polite">Total People Counted: 0</p>
   </main>
+
   <script src="index.js"></script>
 </body>
 </html>
